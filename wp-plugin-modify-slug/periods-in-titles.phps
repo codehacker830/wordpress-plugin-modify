@@ -29,14 +29,21 @@ function sanitize_title_with_dots_and_dashes($title) {
 
 	$title = strtolower($title);
 	$title = preg_replace('/&.+?;/', '', $title); // kill entities
-	$title = preg_replace('/[^%a-z0-9 ._-]/', '', $title);
-	$title = preg_replace('/\s+/', '-', $title);
+	$title = preg_replace('/[^%a-z0-9 ._-]/', '', $title); //
+	$title = preg_replace('/\s+/', '-', $title); //replace ' +' with '-'
 	$title = preg_replace('|-+|', '-', $title);
-	$title = trim($title, '-');
+	$title = trim($title, '-');   //remove whitespace from both side of '-'
+
 	$title = str_replace('-.-', '.', $title);
 	$title = str_replace('-.', '.', $title);
-	$title = str_replace('.-', '.', $title);
+	$title = str_replace('.-', '.', $title); 
 	$title = preg_replace('|([^.])\.$|', '$1', $title);
+	
+	$title = str_replace('-/-', '/', $title);
+	$title = str_replace('-/', '/', $title);
+	$title = str_replace('/-', '/', $title); 
+	$title = preg_replace('|([^.])\.$|', '$1', $title);
+	
 	$title = trim($title, '-'); // yes, again
 
 	return $title;
